@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Pages from The Cozy Spellbook - Coloring Book</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 30%, #CD853F 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, rgba(160, 82, 45, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .spellbook-container {
+            background: linear-gradient(45deg, #DEB887 0%, #F5DEB3 50%, #DEB887 100%);
+            border: 8px solid #8B4513;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            box-shadow: 
+                0 0 30px rgba(139, 69, 19, 0.5),
+                inset 0 0 50px rgba(245, 222, 179, 0.3);
+            animation: bookGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes bookGlow {
+            from {
+                box-shadow: 
+                    0 0 30px rgba(139, 69, 19, 0.5),
+                    inset 0 0 50px rgba(245, 222, 179, 0.3);
+            }
+            to {
+                box-shadow: 
+                    0 0 40px rgba(139, 69, 19, 0.7),
+                    inset 0 0 60px rgba(245, 222, 179, 0.5);
+            }
+        }
+
+        .magical-border {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 3px solid #8B4513;
+            border-radius: 10px;
+            background: rgba(245, 222, 179, 0.1);
+        }
+
+        .content {
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .decorative-flourish {
+            width: 100%;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40'%3E%3Cpath d='M20 20 Q50 5 80 20 Q110 35 140 20 Q170 5 200 20 Q230 35 260 20 Q290 5 320 20 Q350 35 380 20' stroke='%23654321' stroke-width='2' fill='none'/%3E%3Ccircle cx='200' cy='20' r='8' fill='%23654321'/%3E%3Cpath d='M192 16 L208 16 M192 24 L208 24 M196 12 L204 12 M196 28 L204 28' stroke='%23DEB887' stroke-width='1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.2rem;
+            color: #4A2C2A;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.3);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #654321;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .mystical-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            opacity: 0.7;
+        }
+
+        .icon {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .icon:nth-child(1) { animation-delay: 0s; }
+        .icon:nth-child(2) { animation-delay: 1s; }
+        .icon:nth-child(3) { animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .form-container {
+            background: rgba(139, 69, 19, 0.1);
+            border: 2px solid #8B4513;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 3px solid #8B4513;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-family: 'Cinzel', serif;
+            background: rgba(245, 222, 179, 0.9);
+            color: #4A2C2A;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .email-input:focus {
+            border-color: #654321;
+            background: rgba(245, 222, 179, 1);
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .email-input::placeholder {
+            color: #8B7355;
+            font-style: italic;
+        }
+
+        .spell-button {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: #F5DEB3;
+            border: 3px solid #654321;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Cinzel Decorative', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spell-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 222, 179, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .spell-button:hover::before {
+            left: 100%;
+        }
+
+        .spell-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .spell-button:active {
+            transform: translateY(0);
+        }
+
+        .download-section {
+            display: none;
+            animation: spellCast 0.8s ease-out;
+        }
+
+        @keyframes spellCast {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg);
+            }
+            50% {
+                transform: scale(1.05) rotate(2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .success-message {
+            color: #4A2C2A;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.2);
+        }
+
+        .download-button {
+            background: linear-gradient(45deg, #228B22, #32CD32);
+            color: white;
+            text-decoration: none;
+            padding: 18px 35px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Cinzel', serif;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 3px solid #006400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(34, 139, 34, 0.4);
+            background: linear-gradient(45deg, #32CD32, #228B22);
+        }
+
+        .mystical-features {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(139, 69, 19, 0.3);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #654321;
+        }
+
+        .feature-icon {
+            font-size: 1.3rem;
+            margin-right: 15px;
+            filter: sepia(1) hue-rotate(25deg);
+        }
+
+        .enchanted-note {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #8B7355;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background: rgba(139, 69, 19, 0.1);
+            border: 2px solid #8B4513;
+            color: #654321;
+            padding: 10px 25px;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(139, 69, 19, 0.2);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .mystical-icons {
+                gap: 20px;
+            }
+            
+            .icon {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Magical sparkles */
+        .sparkle {
+            position: absolute;
+            color: #DAA520;
+            font-size: 12px;
+            animation: sparkle 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="spellbook-container">
+        <div class="magical-border"></div>
+        
+        <div class="content">
+            <div class="decorative-flourish"></div>
+            
+            <div class="form-container" id="emailForm">
+                <h1>Want Exclusive Free Pages from The Cozy Spellbook?</h1>
+                
+                <div class="mystical-icons">
+                    <span class="icon">🕯️</span>
+                    <span class="icon">📖</span>
+                    <span class="icon">✨</span>
+                </div>
+                
+                <p class="subtitle">
+                    Enter your email and receive 2 exclusive coloring pages from our magical collection. Perfect for relaxation and unleashing your creativity!
+                </p>
+                
+                <form onsubmit="castSpell(event)">
+                    <input type="email" class="email-input" placeholder="Your enchanted email address..." required id="emailInput">
+                    <br>
+                    <button type="submit" class="spell-button">✨ Cast the Download Spell ✨</button>
+                </form>
+
+                <div class="mystical-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span>Instant magical download</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎨</span>
+                        <span>2 exclusive high-quality designs</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📄</span>
+                        <span>Ready to print on A4 parchment</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔮</span>
+                        <span>Your email is magically protected</span>
+                    </div>
+                </div>
+
+                <p class="enchanted-note">
+                    🔐 We never share your mystical information with dark forces. You'll only receive quality content about art and magical coloring.
+                </p>
+            </div>
+
+            <div class="download-section" id="downloadSection">
+                <div class="mystical-icons">
+                    <span class="icon">🌟</span>
+                    <span class="icon">🎉</span>
+                    <span class="icon">🌟</span>
+                </div>
+                
+                <div class="success-message">The spell has been cast! Your magical pages await:</div>
+                
+                <a href="#" class="download-button" id="downloadLink" onclick="downloadMagicalPages()">
+                    📥 Download Your Cozy Spellbook Pages
+                </a>
+                
+                <p class="subtitle" style="margin-top: 25px;">
+                    Your enchanted coloring pages are ready! Print them on your finest parchment and let the magic flow through your colors! 🌈✨
+                </p>
+
+                <button onclick="returnToSpellbook()" class="back-button">
+                    ← Return to Spellbook
+                </button>
+            </div>
+
+            <div class="decorative-flourish" style="margin-top: 30px; margin-bottom: 0;"></div>
+        </div>
+
+        <!-- Magical sparkles -->
+        <div class="sparkle" style="top: 10%; left: 15%;">✨</div>
+        <div class="sparkle" style="top: 20%; right: 20%; animation-delay: 0.5s;">⭐</div>
+        <div class="sparkle" style="bottom: 15%; left: 10%; animation-delay: 1s;">✨</div>
+        <div class="sparkle" style="bottom: 25%; right: 15%; animation-delay: 1.5s;">⭐</div>
+    </div>
+
+    <script>
+        // Mystical email collection scroll
+        let enchantedEmails = [];
+
+        function castSpell(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('emailInput').value;
+            
+            // Store the magical email
+            enchantedEmails.push({
+                email: email,
+                timestamp: new Date().toISOString(),
+                spellCast: 'Cozy Spellbook Download',
+                userAgent: navigator.userAgent
+            });
+            
+            // Magical console logging (remove in production)
+            console.log('🔮 Magical email collected:', email);
+            console.log('📜 All enchanted emails:', enchantedEmails);
+            
+            // Reveal the download spell
+            document.getElementById('emailForm').style.display = 'none';
+            document.getElementById('downloadSection').style.display = 'block';
+            
+            // Add some magical sparkles
+            createMagicalSparkles();
+        }
+
+        function downloadMagicalPages() {
+            // Open the actual MediaFire download link
+            window.open('https://www.mediafire.com/file/5egtii4oi4a1oc7/ExclusivePagesCozySpellBook.pdf/file', '_blank');
+            
+            // Optional: Show a magical message
+            setTimeout(() => {
+                alert('🎨✨ Your magical pages are downloading! \n\nIf the download doesn\'t start automatically, please check your browser\'s download settings or pop-up blocker.');
+            }, 1000);
+        }
+
+        function createDemoMagicalDownload() {
+            const magicalContent = `
+🔮 THE COZY SPELLBOOK - FREE COLORING PAGES 🔮
+
+✨ Congratulations, magical artist! ✨
+
+You have successfully downloaded 2 exclusive pages from 
+The Cozy Spellbook coloring collection.
+
+🎨 Instructions for your magical coloring session:
+- Print on high-quality paper
+- Use your favorite colored pencils or markers
+- Let your creativity flow freely
+- Share your magical creations!
+
+📧 Keep an eye on your inbox for more magical content!
+
+Happy Coloring! 
+🌟✨🎨✨🌟
+            `;
+            
+            const blob = new Blob([magicalContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Cozy_Spellbook_Free_Pages_Demo.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        function returnToSpellbook() {
+            document.getElementById('downloadSection').style.display = 'none';
+            document.getElementById('emailForm').style.display = 'block';
+            document.getElementById('emailInput').value = '';
+        }
+
+        function createMagicalSparkles() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.innerHTML = ['✨', '⭐', '🌟'][Math.floor(Math.random() * 3)];
+                    sparkle.className = 'sparkle';
+                    sparkle.style.top = Math.random() * 80 + 10 + '%';
+                    sparkle.style.left = Math.random() * 80 + 10 + '%';
+                    sparkle.style.animationDelay = Math.random() * 2 + 's';
+                    
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(sparkle);
+                    }, 3000);
+                }, i * 200);
+            }
+        }
+
+        // Mystical email export function (for you to use)
+        function exportEnchantedEmails() {
+            console.log('🔮 Exporting mystical email collection:');
+            console.table(enchantedEmails);
+            
+            const csvContent = 'Email,Timestamp,Spell Cast,User Agent\n' + 
+                enchantedEmails.map(item => 
+                    `"${item.email}","${item.timestamp}","${item.spellCast}","${item.userAgent}"`
+                ).join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cozy_spellbook_emails.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Magical shortcut for email export (Ctrl+M for Magic)
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'm') {
+                event.preventDefault();
+                exportEnchantedEmails();
+            }
+        });
+
+        // Add some ambient magical effects
+        setInterval(createMagicalSparkles, 15000);
+    </script>
+</body>
+</html>
