@@ -421,6 +421,9 @@
     </div>
 
     <script>
+        // Google Apps Script URL per salvare le email in Google Sheets
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVwlF84dmxsPX3EF3XNq0hJFzkFbluIlA8oge4iGW6KdfSEAJ2W3n0UMOPu_j3WMkz/exec';
+        
         // Mystical email collection scroll
         let enchantedEmails = [];
 
@@ -428,25 +431,54 @@
             event.preventDefault();
             
             const email = document.getElementById('emailInput').value;
+            const submitButton = document.querySelector('.spell-button');
             
-            // Store the magical email
-            enchantedEmails.push({
+            // Disable button during processing
+            submitButton.disabled = true;
+            submitButton.innerHTML = '✨ Casting spell...';
+            
+            // Prepare data for Google Sheets
+            const emailData = {
                 email: email,
                 timestamp: new Date().toISOString(),
-                spellCast: 'Cozy Spellbook Download',
-                userAgent: navigator.userAgent
+                userAgent: navigator.userAgent,
+                source: 'Cozy Spellbook Landing'
+            };
+            
+            // Store locally as backup
+            enchantedEmails.push(emailData);
+            
+            // Send to Google Sheets
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                body: JSON.stringify(emailData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('✅ Email successfully sent to Google Sheets:', data);
+                
+                // Show success and download section
+                document.getElementById('emailForm').style.display = 'none';
+                document.getElementById('downloadSection').style.display = 'block';
+                createMagicalSparkles();
+            })
+            .catch(error => {
+                console.log('⚠️ Error sending to Google Sheets:', error);
+                console.log('📧 Email saved locally:', email);
+                
+                // Still show download section even if Google Sheets fails
+                document.getElementById('emailForm').style.display = 'none';
+                document.getElementById('downloadSection').style.display = 'block';
+                createMagicalSparkles();
+            })
+            .finally(() => {
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.innerHTML = '✨ Cast the Download Spell ✨';
             });
-            
-            // Magical console logging (remove in production)
-            console.log('🔮 Magical email collected:', email);
-            console.log('📜 All enchanted emails:', enchantedEmails);
-            
-            // Reveal the download spell
-            document.getElementById('emailForm').style.display = 'none';
-            document.getElementById('downloadSection').style.display = 'block';
-            
-            // Add some magical sparkles
-            createMagicalSparkles();
         }
 
         function downloadMagicalPages() {
@@ -457,38 +489,6 @@
             setTimeout(() => {
                 alert('🎨✨ Your magical pages are downloading! \n\nIf the download doesn\'t start automatically, please check your browser\'s download settings or pop-up blocker.');
             }, 1000);
-        }
-
-        function createDemoMagicalDownload() {
-            const magicalContent = `
-🔮 THE COZY SPELLBOOK - FREE COLORING PAGES 🔮
-
-✨ Congratulations, magical artist! ✨
-
-You have successfully downloaded 2 exclusive pages from 
-The Cozy Spellbook coloring collection.
-
-🎨 Instructions for your magical coloring session:
-- Print on high-quality paper
-- Use your favorite colored pencils or markers
-- Let your creativity flow freely
-- Share your magical creations!
-
-📧 Keep an eye on your inbox for more magical content!
-
-Happy Coloring! 
-🌟✨🎨✨🌟
-            `;
-            
-            const blob = new Blob([magicalContent], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Cozy_Spellbook_Free_Pages_Demo.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
         }
 
         function returnToSpellbook() {
